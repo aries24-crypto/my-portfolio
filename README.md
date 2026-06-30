@@ -1,2 +1,25 @@
-# my-portfolio
-Personal portfolio built to showcase real-world projects, certifications, and my work across AI, business, and digital marketing.
+# Tejas' Portfolio
+
+Welcome to my personal portfolio repository.
+
+This portfolio showcases my projects, certifications, skills, and achievements across Generative AI, business, digital marketing, and technology.
+
+## Featured Projects
+
+- Step2Heal
+- Step2Track
+
+## Skills
+
+- Generative AI
+- Prompt Engineering
+- Digital Marketing
+- Research & Analytics
+- Content Writing
+- Branding
+
+## Connect
+
+- LinkedIn
+- GitHub
+- Email
