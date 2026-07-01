@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tejas Yadav | Portfolio</title>
-    <meta name="description" content="Portfolio of Tejas Yadav - Building practical AI-powered solutions through business, marketing, creativity, and technology.">
+    <meta name="description" content="Portfolio of Tejas Yadav - Building practical solutions through business, marketing, creativity, and technology.">
     
-    <!-- Google Fonts for Clean Premium Typography -->
+    <!-- Google Fonts for Editorial Typographic Hierarchy -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
@@ -23,12 +23,23 @@
             --text-primary: #1d1d1f;
             --text-secondary: #86868b;
             --accent-red: #ff3b30;
-            --accent-hover: #e03126;
             --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             --font-serif: 'Playfair Display', Georgia, serif;
             --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             --transition-fast: all 0.2s ease;
             --border-radius: 12px;
+
+            /* Step2Heal Custom Colors (Teal Dominant) */
+            --s2h-dark-teal: #0d3b3f;
+            --s2h-light-teal: #50a3a4;
+            --s2h-orange: #f95738;
+            --s2h-grey: #e9ecef;
+
+            /* Step2Track Custom Colors (Orange Dominant) */
+            --s2t-orange: #f95738;
+            --s2t-dark-teal: #0d3b3f;
+            --s2t-light-teal: #50a3a4;
+            --s2t-grey: #f4f4f9;
         }
 
         * {
@@ -83,6 +94,7 @@
             }
         }
 
+        /* */
         header {
             position: fixed;
             top: 0;
@@ -221,6 +233,7 @@
             }
         }
 
+        /* */
         .hero-section {
             height: 100vh;
             min-height: 650px;
@@ -255,11 +268,18 @@
             z-index: 2;
         }
 
+        /* Adjusted desktop view padding calculation to prevent top label cut-off under header */
         .hero-content {
             position: relative;
             z-index: 3;
             max-width: 800px;
-            padding-top: 3rem;
+            padding-top: 5rem; /* Safe margins */
+        }
+
+        @media (min-width: 769px) {
+            .hero-content {
+                padding-top: 7rem; /* Explicitly offset desktop navbar height */
+            }
         }
 
         .hero-tag {
@@ -339,6 +359,7 @@
             transform: translateY(-2px);
         }
 
+        /* */
         section {
             padding: 9rem 0;
             position: relative;
@@ -369,6 +390,7 @@
             line-height: 1.15;
         }
 
+        /* */
         .projects-container {
             display: flex;
             flex-direction: column;
@@ -502,6 +524,23 @@
             overflow: hidden;
         }
 
+        /* Responsive image cover styling */
+        .project-img-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: var(--transition-smooth);
+            opacity: 0.9;
+        }
+
+        .project-card:hover .project-img-cover {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
         .project-circle {
             width: 140px;
             height: 140px;
@@ -545,6 +584,7 @@
             }
         }
 
+        /* */
         .education-grid {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
@@ -651,6 +691,7 @@
             }
         }
 
+        /* */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -715,6 +756,7 @@
             color: var(--text-primary);
         }
 
+        /* */
         .contact-section {
             background-color: var(--bg-light);
             border-top: 1px solid rgba(0, 0, 0, 0.05);
@@ -792,6 +834,10 @@
             width: 100%;
             margin-top: 1rem;
             border: 1px solid var(--text-primary);
+            display: inline-flex;
+            text-decoration: none;
+            justify-content: center;
+            align-items: center;
         }
 
         .btn-resume:hover {
@@ -846,6 +892,26 @@
             background: var(--accent-red);
         }
 
+        /* Custom premium cursor following light glow effect */
+        .glow-cursor-follow {
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 59, 48, 0.02) 0%, rgba(255, 255, 255, 0) 70%);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.08s ease-out;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .glow-cursor-follow {
+                display: none; /* Turn off tracking element on mobile touch viewports */
+            }
+        }
+
         @keyframes rotateContinuous {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -861,6 +927,87 @@
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Message Box Toast alert styling */
+        .notification-toast {
+            position: fixed;
+            bottom: 2rem;
+            right: -100%;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+            padding: 1.25rem 2rem;
+            color: var(--text-primary);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            z-index: 10005;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: var(--transition-smooth);
+        }
+
+        .toast-indicator {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-red);
+            border-radius: 50%;
+        }
+
+        /* Grid formatting for Core Competencies */
+        .competencies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .comp-card {
+            background-color: var(--card-light);
+            border: 1px solid var(--card-border-light);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            transition: var(--transition-smooth);
+        }
+
+        .comp-card:hover {
+            border-color: var(--card-border-hover);
+            transform: translateY(-2px);
+        }
+
+        .comp-card h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .comp-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* Skills groups cloud styling */
+        .skills-tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag-item {
+            background-color: #f0f0f3;
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition-fast);
+        }
+
+        .skill-tag-item:hover {
+            background-color: var(--accent-red);
+            color: #ffffff;
         }
     </style>
 </head>
@@ -881,6 +1028,8 @@
             </a>
             <nav class="desktop-only">
                 <ul>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#competencies" class="nav-link">Competencies</a></li>
                     <li><a href="#projects" class="nav-link">Projects</a></li>
                     <li><a href="#education" class="nav-link">Education</a></li>
                     <li><a href="#achievements" class="nav-link">Achievements</a></li>
@@ -896,12 +1045,15 @@
 
     <!-- Drawer Overlay Navigation for Mobile Viewports -->
     <div class="mobile-nav" id="mobileNav">
+        <a href="#about" class="mobile-nav-link">About</a>
+        <a href="#competencies" class="mobile-nav-link">Competencies</a>
         <a href="#projects" class="mobile-nav-link">Projects</a>
         <a href="#education" class="mobile-nav-link">Education</a>
         <a href="#achievements" class="mobile-nav-link">Achievements</a>
         <a href="#contact" class="mobile-nav-link">Contact</a>
     </div>
 
+    <!-- -->
     <section class="hero-section" id="hero">
         <div class="hero-bg"></div>
         <div class="hero-overlay"></div>
@@ -910,21 +1062,95 @@
                 <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
                 </svg>
-                Curious learner • AI-first mindset • Creative problem solver
+                Multidisciplinary Builder • Strategic Thinker
             </div>
             <h1 class="hero-title">
-                Exploring AI <br>through a <span class="serif-italic">creative</span> & business lens.
+                Tejas Yadav <br>
+                <span class="serif-italic">Building at the intersection of Generative AI, design, and business.</span>
             </h1>
             <p class="hero-description">
-                I'm Tejas Yadav, a student passionate about how Generative AI can solve real-world problems. I enjoy combining creativity, business thinking, branding, digital marketing, and technology to build meaningful projects.
+                Currently pursuing a Bachelor of Fashion Technology at NIFT, with hands-on experience across web development, branding, and AI-assisted workflows.
             </p>
             <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">Featured Work</a>
-                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Contact Me</a>
             </div>
         </div>
     </section>
 
+    <!-- -->
+    <section id="about" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Overview</span>
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: start;">
+                <div>
+                    <p style="font-size: 1.15rem; color: var(--text-primary); margin-bottom: 1.5rem; font-weight: 500; line-height: 1.6;">
+                        I am a student with a broad, deliberately developed skill set spanning web development, design, content, and business analytics. Rather than specializing early, I have focused on building practical experience across multiple disciplines and applying them to real, delivered projects.
+                    </p>
+                    <p style="margin-bottom: 1.5rem;">
+                        On the technical side, I have independently built and deployed a live website (HTML, CSS, JavaScript, GitHub, Vercel) using AI-assisted development practices, including prompt engineering and iterative refinement. On the design and content side, I have developed brand identities, including a complete logo design, and produced written content across formats. On the analytical side, I am currently completing training in Business Analytics with Generative and Agentic AI, and have applied research, market analysis, and data analysis skills to project work.
+                    </p>
+                    <p>
+                        I have recently completed my secondary education (CBSE, Science) and am set to begin a Bachelor of Fashion Technology (B.F.Tech) at the National Institute of Fashion Technology (NIFT). My academic direction and practical experience are not confined to a single domain; my objective is to apply a combined skill set — technical, creative, and analytical — to meaningful work.
+                    </p>
+                </div>
+                <div class="education-card" style="padding: 2.5rem; background: var(--card-light);">
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">A multidisciplinary approach</h4>
+                    <p style="font-size: 0.95rem; line-height: 1.6;">
+                        A student with demonstrated experience across web development, design, content, and business analytics. Delivered projects include a live, deployed website for a physiotherapy clinic and an AI-assisted posture-assessment concept, supported by formal training in business analytics and communication.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- -->
+    <section id="competencies" class="reveal" style="background: #fafafa; border-top: 1px solid rgba(0,0,0,0.02); border-bottom: 1px solid rgba(0,0,0,0.02);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Range of Abilities</span>
+                <h2 class="section-title">Core Competencies</h2>
+            </div>
+            
+            <div class="competencies-grid">
+                <!-- 1 -->
+                <div class="comp-card">
+                    <h3>Web Development</h3>
+                    <p>End-to-end website development and deployment using HTML, CSS, JavaScript, GitHub, and Vercel, supported by AI-assisted development practices.</p>
+                </div>
+                <!-- 2 -->
+                <div class="comp-card">
+                    <h3>Design & Branding</h3>
+                    <p>Logo design and brand identity development, with consistent visual application across digital platforms, using tools including Canva and AI image generation.</p>
+                </div>
+                <!-- 3 -->
+                <div class="comp-card">
+                    <h3>Written & Business Comm</h3>
+                    <p>Content writing and professional communication, including business writing, email etiquette, and report writing, developed through applied practice and formal certification.</p>
+                </div>
+                <!-- 4 -->
+                <div class="comp-card">
+                    <h3>Research & Data Analysis</h3>
+                    <p>Research and analytics, market research, data analysis, SQL, and MS Excel, applied to inform project decisions and business outcomes.</p>
+                </div>
+                <!-- 5 -->
+                <div class="comp-card">
+                    <h3>Generative & Agentic AI</h3>
+                    <p>Prompt engineering and AI-assisted workflows, applied throughout development, design, and research processes as part of ongoing training in Business Analytics with Generative and Agentic AI.</p>
+                </div>
+                <!-- 6 -->
+                <div class="comp-card">
+                    <h3>Digital Marketing</h3>
+                    <p>Social media marketing and audience development, demonstrated through management of a YouTube channel (2,000+ subscribers) and content strategy for a client brand.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- -->
     <section id="projects" class="reveal">
         <div class="container">
             <div class="section-header">
@@ -933,67 +1159,76 @@
             </div>
             
             <div class="projects-container">
-                <!-- Project: Step2Heal -->
-                <div class="project-card">
+                <!-- Project: Step2Heal (Custom Palette: Dark Teal, 65% Light Teal, 15% Orange, 15% Grey, 5% White/Black) -->
+                <div class="project-card" style="border-left: 5px solid var(--s2h-light-teal);">
                     <div class="project-info">
-                        <div class="project-status live">
-                            <span class="dot"></span>Live & Deployed
+                        <div class="project-status live" style="color: var(--s2h-light-teal);">
+                            <span class="dot" style="background-color: var(--s2h-light-teal);"></span>Project Developer Case Study
                         </div>
-                        <h3 class="project-title">Step2Heal</h3>
+                        <h3 class="project-title" style="color: var(--s2h-dark-teal);">Step2Heal Web Project</h3>
+                        <p style="font-size: 0.85rem; color: var(--s2h-orange); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.5rem;">
+                            Step2Heal Advanced Physiotherapy Centre • Noida (Virtual)
+                        </p>
                         <p class="project-desc">
-                            Built the complete digital presence and interactive system layout for a modern, independent physiotherapy clinic. Designed logo systems, client branding architectures, and engineered rapid automation pipelines with Generative AI tools.
+                            Designed, developed, and deployed a responsive, multi-page website for a physiotherapy clinic using HTML, CSS, JavaScript, GitHub, and Vercel, with Generative AI supporting the development process. Independently managed project planning, prompt engineering, UI customization, testing, debugging, SEO optimization, and deployment.
                         </p>
                         <div class="project-tags">
-                            <span class="p-tag">Branding & Planning</span>
-                            <span class="p-tag">Generative AI</span>
-                            <span class="p-tag">HTML/CSS</span>
-                            <span class="p-tag">GitHub & Vercel</span>
+                            <span class="p-tag" style="background: var(--s2h-grey); color: var(--s2h-dark-teal);">HTML / CSS</span>
+                            <span class="p-tag" style="background: var(--s2h-grey); color: var(--s2h-dark-teal);">JavaScript</span>
+                            <span class="p-tag" style="background: var(--s2h-grey); color: var(--s2h-dark-teal);">GitHub & Vercel</span>
+                            <span class="p-tag" style="background: var(--s2h-grey); color: var(--s2h-dark-teal);">Logo Design</span>
+                            <span class="p-tag" style="background: var(--s2h-grey); color: var(--s2h-dark-teal);">Generative AI</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com" target="_blank" class="project-btn">
+                            <a href="https://github.com" target="_blank" class="project-btn" style="color: var(--s2h-dark-teal); border-color: var(--s2h-dark-teal);">
                                 GitHub Code
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                             </a>
-                            <a href="#" class="project-btn">
+                            <a href="#" class="project-btn" style="color: var(--s2h-orange); border-color: var(--s2h-orange);">
                                 Live Demo
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                             </a>
                         </div>
                     </div>
                     <div class="project-visual">
-                        <div class="project-visual-container">
-                            <div class="project-circle"></div>
-                            <div class="project-core">S2H</div>
+                        <div class="project-visual-container" style="border: 1px solid var(--s2h-light-teal);">
+                            <!-- Clean fallbacks for requested portfolio assets -->
+                            <img class="project-img-cover" src="Screenshot (7).png" alt="Step2Heal Project Screenshot" onerror="this.style.display='none';">
+                            <div class="project-circle" style="border-color: var(--s2h-light-teal);"></div>
+                            <div class="project-core" style="color: var(--s2h-dark-teal); border-color: var(--s2h-light-teal);">S2H</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project: Step2Track -->
-                <div class="project-card">
+                <!-- Project: Step2Track (Custom Palette: 50% Orange, Dark Teal, 25% Light Teal, 25% Grey, White/Black) -->
+                <div class="project-card" style="border-left: 5px solid var(--s2t-orange);">
                     <div class="project-info">
-                        <div class="project-status">
-                            <span class="dot"></span>Concept Design Stage
+                        <div class="project-status" style="color: var(--s2t-orange);">
+                            <span class="dot" style="background-color: var(--s2t-orange);"></span>In Development
                         </div>
-                        <h3 class="project-title">Step2Track</h3>
+                        <h3 class="project-title" style="color: var(--s2t-orange);">Step2Track Posture System</h3>
                         <p class="project-desc">
-                            AI-assisted physical intelligence concept targeting diagnostic posture correction, digital assessment trackers, and physiotherapy biomechanical motion visualization blueprints.
+                            Designed and developed an AI-assisted web application concept for posture assessment and joint range-of-motion measurement. Focused on user interface design, workflow planning, and physiotherapy-specific functionality, with Generative AI supporting the development process.
                         </p>
                         <div class="project-tags">
-                            <span class="p-tag">Product Thinking</span>
-                            <span class="p-tag">UI/UX Blueprint</span>
-                            <span class="p-tag">Health-Tech Concept</span>
+                            <span class="p-tag" style="background: var(--s2t-grey); color: var(--s2t-dark-teal);">Generative AI</span>
+                            <span class="p-tag" style="background: var(--s2t-grey); color: var(--s2t-dark-teal);">UI/UX Design</span>
+                            <span class="p-tag" style="background: var(--s2t-grey); color: var(--s2t-dark-teal);">Workflow Planning</span>
+                            <span class="p-tag" style="background: var(--s2t-grey); color: var(--s2t-dark-teal);">Healthcare Concept</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com" target="_blank" class="project-btn">
+                            <a href="https://github.com" target="_blank" class="project-btn" style="color: var(--s2t-dark-teal); border-color: var(--s2t-dark-teal);">
                                 GitHub Concept
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                             </a>
                         </div>
                     </div>
                     <div class="project-visual">
-                        <div class="project-visual-container" style="background: radial-gradient(circle at center, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.04) 100%);">
-                            <div class="project-circle" style="border-style: dotted; animation-duration: 35s;"></div>
-                            <div class="project-core">S2T</div>
+                        <div class="project-visual-container" style="border: 1px solid var(--s2t-orange);">
+                            <!-- Clean fallbacks for requested portfolio assets -->
+                            <img class="project-img-cover" src="IMG-20250524-WA0001.jpg" alt="Step2Track Concept Screenshot" onerror="this.style.display='none';">
+                            <div class="project-circle" style="border-color: var(--s2t-orange); border-style: dotted; animation-duration: 35s;"></div>
+                            <div class="project-core" style="color: var(--s2t-orange); border-color: var(--s2t-orange);">S2T</div>
                         </div>
                     </div>
                 </div>
@@ -1001,6 +1236,59 @@
         </div>
     </section>
 
+    <!-- -->
+    <section id="skills-section" class="reveal" style="background: #fafafa; border-top: 1px solid rgba(0,0,0,0.02); border-bottom: 1px solid rgba(0,0,0,0.02); padding: 6rem 0;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 4rem; align-items: start;">
+                <div>
+                    <span class="section-tag">Toolbox</span>
+                    <h2 class="section-title" style="font-size: 2.2rem; margin-bottom: 1.5rem;">Skills Directory</h2>
+                    <p>Familiar tools, utilities, platforms, and methodologies deployed across projects.</p>
+                </div>
+                <div>
+                    <h4 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 1rem;">AI & Tools</h4>
+                    <div class="skills-tag-cloud" style="margin-bottom: 2rem;">
+                        <span class="skill-tag-item">Generative AI Tools</span>
+                        <span class="skill-tag-item">Prompt Engineering</span>
+                        <span class="skill-tag-item">AI Image Generation</span>
+                        <span class="skill-tag-item">Replit (GenAI)</span>
+                    </div>
+
+                    <h4 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 1rem;">Development</h4>
+                    <div class="skills-tag-cloud" style="margin-bottom: 2rem;">
+                        <span class="skill-tag-item">HTML</span>
+                        <span class="skill-tag-item">CSS</span>
+                        <span class="skill-tag-item">GitHub</span>
+                        <span class="skill-tag-item">Vercel</span>
+                        <span class="skill-tag-item">SQL</span>
+                    </div>
+
+                    <h4 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 1rem;">Design & Content</h4>
+                    <div class="skills-tag-cloud" style="margin-bottom: 2rem;">
+                        <span class="skill-tag-item">Logo Design</span>
+                        <span class="skill-tag-item">Branding</span>
+                        <span class="skill-tag-item">Canva</span>
+                        <span class="skill-tag-item">Web Design</span>
+                        <span class="skill-tag-item">Content Writing</span>
+                    </div>
+
+                    <h4 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 1rem;">Business & Analysis</h4>
+                    <div class="skills-tag-cloud">
+                        <span class="skill-tag-item">Research & Analytics</span>
+                        <span class="skill-tag-item">Data Analysis</span>
+                        <span class="skill-tag-item">Market Research</span>
+                        <span class="skill-tag-item">MS Excel</span>
+                        <span class="skill-tag-item">Problem Solving</span>
+                        <span class="skill-tag-item">Social Media Marketing</span>
+                        <span class="skill-tag-item">Written Communication</span>
+                        <span class="skill-tag-item">Computer Skills</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- -->
     <section id="education" class="reveal">
         <div class="container">
             <div class="section-header">
@@ -1012,32 +1300,37 @@
                 <!-- Principal Institution Highlight -->
                 <div class="education-card">
                     <span class="education-badge">Selected Admission</span>
-                    <h3>National Institute of Fashion Technology</h3>
-                    <p class="discipline">NIFT Bachelor of Fashion Technology (B.FTech)</p>
+                    <h3>National Institute of Fashion Technology (NIFT)</h3>
+                    <p class="discipline">Bachelor of Fashion Technology (B.FTech)</p>
                     <div class="education-meta">
-                        <span>Cohort: <strong>Class of 2026 Selection</strong></span>
+                        <span>Cohort: <strong>2026 – 2030</strong></span>
                     </div>
                     <p class="education-details">
-                        Successfully qualified NIFT Entrance Examination 2026, targeting the unique interdisciplinary domains where premium system operations, technological execution, visual product architecture, and brand logistics converge.
+                        Selected for admission to the National Institute of Fashion Technology (NIFT), Bachelor of Fashion Technology program, through the highly competitive NIFT Entrance Examination 2026 — one of India's premier institutes for Fashion Technology and Design education.
                     </p>
                 </div>
 
-                <!-- Academic Pillars / Highlights list -->
+                <!-- CBSE Board Clearings (No school names mentioned per requested constraint) -->
                 <div class="education-highlights-list">
+                    <!-- XII -->
                     <div class="edu-highlight-item">
-                        <h4>Interdisciplinary Focus</h4>
-                        <p>Combining structural technical processes with design management metrics and production optimization techniques.</p>
+                        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-red); font-weight: 700; display: block; margin-bottom: 0.5rem;">Class XII Science • 2026</span>
+                        <h4>CENTRAL BOARD OF SECONDARY EDUCATION (CBSE)</h4>
+                        <p>Completed Senior Secondary (XII) education focused on physics, chemistry, and mathematics with analytical precision.</p>
                     </div>
+                    <!-- X -->
                     <div class="edu-highlight-item">
-                        <h4>Strategic Execution</h4>
-                        <p>Understanding user experience paradigms, brand aesthetics, data diagnostics, and practical technological integrations.</p>
+                        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-red); font-weight: 700; display: block; margin-bottom: 0.5rem;">Class X • 2024</span>
+                        <h4>CENTRAL BOARD OF SECONDARY EDUCATION (CBSE)</h4>
+                        <p>Completed Secondary (X) Board examinations with strong fundamental quantitative and science background.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="achievements" class="reveal">
+    <!-- -->
+    <section id="achievements" class="reveal" style="background: #fafafa; border-top: 1px solid rgba(0,0,0,0.02); border-bottom: 1px solid rgba(0,0,0,0.02);">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Validation</span>
@@ -1045,77 +1338,69 @@
             </div>
             
             <div class="cards-grid">
-                <!-- Milestone card -->
+                <!-- Cert 1 -->
                 <div class="modern-card">
                     <div class="card-top">
-                        <span class="card-tag special">Key Academic Achievement</span>
-                        <h3 class="card-title">NIFT B.FTech Admission</h3>
+                        <span class="card-tag special">Ongoing Training</span>
+                        <h3 class="card-title">Business Analytics with Generative & Agentic AI</h3>
                     </div>
                     <div class="card-bottom">
-                        <span>NIFT Entrance Examination</span>
-                        <span class="card-meta">2026 Selection</span>
+                        <span>Masai School (Virtual)</span>
+                        <span class="card-meta">May 2026 – Present</span>
                     </div>
                 </div>
 
-                <!-- Cert card 1 -->
-                <div class="modern-card">
-                    <div class="card-top">
-                        <span class="card-tag">Specialization</span>
-                        <h3 class="card-title">Business Analytics with Gen & Agentic AI</h3>
-                    </div>
-                    <div class="card-bottom">
-                        <span>Verified Credential</span>
-                        <span class="card-meta">GenAI & Agents</span>
-                    </div>
-                </div>
-
-                <!-- Cert card 2 -->
+                <!-- Cert 2 -->
                 <div class="modern-card">
                     <div class="card-top">
                         <span class="card-tag">Communication</span>
-                        <h3 class="card-title">Effective Communication Foundations</h3>
+                        <h3 class="card-title">Effective Communication Certification</h3>
                     </div>
                     <div class="card-bottom">
-                        <span>Leadership Focus</span>
-                        <span class="card-meta">Strategic Clarity</span>
+                        <span>Great Learning</span>
+                        <span class="card-meta">Verified</span>
                     </div>
                 </div>
 
-                <!-- Cert card 3 -->
+                <!-- Cert 3 / Achievement -->
                 <div class="modern-card">
                     <div class="card-top">
-                        <span class="card-tag">Marketing</span>
-                        <h3 class="card-title">Data-Driven Growth Marketing</h3>
+                        <span class="card-tag">Extra-Curricular</span>
+                        <h3 class="card-title">Personal Art Channel Management</h3>
                     </div>
                     <div class="card-bottom">
-                        <span>Analysis Specialization</span>
-                        <span class="card-meta">Data Diagnostics</span>
+                        <span>YouTube Audience</span>
+                        <span class="card-meta">2,000+ Subs</span>
                     </div>
                 </div>
 
-                <!-- Upcoming Target block -->
-                <div class="modern-card" style="border-style: dashed; background: transparent;">
+                <!-- Cert 4 -->
+                <div class="modern-card">
                     <div class="card-top">
-                        <span class="card-tag">Future Target</span>
-                        <h3 class="card-title" style="color: var(--text-secondary);">Upcoming Advanced Analytical & Strategic Systems Validation</h3>
+                        <span class="card-tag">Key Milestone</span>
+                        <h3 class="card-title">NIFT Entrance Examination Selected</h3>
                     </div>
                     <div class="card-bottom">
-                        <span>Continuous Learning Curve</span>
-                        <span class="card-meta">In Progress</span>
+                        <span>National Ranking</span>
+                        <span class="card-meta">2026</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- -->
     <section id="contact" class="contact-section reveal">
         <div class="container">
             <div class="contact-layout">
                 <div class="contact-cta">
-                    <span class="section-tag">Let's Collaborate</span>
-                    <h3>Start a Conversation</h3>
+                    <span class="section-tag">Collaboration</span>
+                    <h3>Let's Discuss a Project</h3>
                     <p>
-                        I'm always open to exploring digital workflows, Generative AI applications, business structures, brand strategies, and analytical research. Reach out through my social networks.
+                        I welcome opportunities for internships, collaborations, and project-based work. Please feel free to reach out using the details or professional social handles.
+                    </p>
+                    <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-primary);">
+                        <strong>Location:</strong> Noida, India
                     </p>
                 </div>
                 
@@ -1139,22 +1424,33 @@
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                         </a>
 
-                        <!-- Email -->
-                        <a href="mailto:hello@tejasyadav.com" class="contact-item">
+                        <!-- Email Direct -->
+                        <a href="mailto:tejas.ydv24@gmail.com" class="contact-item">
                             <span class="contact-item-left">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                                     <polyline points="22,6 12,13 2,6"></polyline>
                                 </svg>
-                                Direct Email
+                                tejas.ydv24@gmail.com
                             </span>
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                         </a>
 
-                        <!-- Premium Resume trigger button -->
-                        <button class="btn btn-resume" onclick="handleResumeClick()">
+                        <!-- Direct Call -->
+                        <a href="tel:+919389334677" class="contact-item">
+                            <span class="contact-item-left">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                                +91 9389334677
+                            </span>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        </a>
+
+                        <!-- Premium Functional Resume Button -->
+                        <a href="TejasYadav_resume.pdf" download="TejasYadav_resume.pdf" class="btn btn-resume">
                             Download Resume (PDF)
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1164,7 +1460,7 @@
     <!-- Success Feedback Notification Toast -->
     <div class="notification-toast" id="toast">
         <div class="toast-indicator"></div>
-        <span id="toastMessage">Resume is being generated for download.</span>
+        <span id="toastMessage">Downloading resume...</span>
     </div>
 
     <!-- Minimalist Footer -->
@@ -1177,6 +1473,7 @@
         </div>
     </footer>
 
+    <!-- -->
     <script>
         // Track Scroll Progress Indicator
         window.addEventListener('scroll', () => {
@@ -1195,6 +1492,12 @@
 
             // Track page anchors to toggle active state highlight on links
             detectActiveNav();
+        });
+
+        // Ambient glowing light follow tracking script
+        const glow = document.getElementById('glowCursor');
+        document.addEventListener('mousemove', (e) => {
+            glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
         });
 
         // Mobile Menu Drawer Handler
@@ -1241,7 +1544,7 @@
 
         // Track active navigation links
         const navLinks = document.querySelectorAll('.nav-link');
-        const sections = document.querySelectorAll('section');
+        const sections = document.querySelectorAll('section, .hero-section');
 
         function detectActiveNav() {
             let currentSection = "";
@@ -1260,14 +1563,11 @@
             });
         }
 
-        // Simulating highly premium resume action feedback
-        function handleResumeClick() {
+        // Attach toast event handler to PDF download
+        const resumeBtn = document.querySelector('.btn-resume');
+        resumeBtn.addEventListener('click', () => {
             showToast("Opening Resume document catalog...");
-            // Standard relative placeholder redirect
-            setTimeout(() => {
-                window.open('#', '_blank');
-            }, 600);
-        }
+        });
 
         function showToast(text) {
             const toast = document.getElementById('toast');
