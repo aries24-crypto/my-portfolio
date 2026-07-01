@@ -84,17 +84,16 @@
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1.5rem;
             position: relative;
         }
 
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .container {
-                padding: 0 1.5rem;
+                padding: 0 2.5rem;
             }
         }
 
-        /* */
         header {
             position: fixed;
             top: 0;
@@ -144,6 +143,17 @@
             display: inline-block;
         }
 
+        /* Mobile First Navigation hidden by default, shown via media queries */
+        nav.desktop-only {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            nav.desktop-only {
+                display: block;
+            }
+        }
+
         nav ul {
             display: flex;
             list-style: none;
@@ -171,12 +181,17 @@
         }
 
         .menu-toggle {
-            display: none;
             background: none;
             border: none;
             cursor: pointer;
             padding: 0.5rem;
             z-index: 1001;
+        }
+
+        @media (min-width: 768px) {
+            .menu-toggle {
+                display: none;
+            }
         }
 
         .menu-toggle span {
@@ -192,6 +207,7 @@
             background-color: var(--text-primary);
         }
 
+        /* Mobile Nav Drawer Overlay */
         .mobile-nav {
             position: fixed;
             top: 0;
@@ -224,16 +240,6 @@
             color: var(--text-hero);
         }
 
-        @media (max-width: 768px) {
-            nav.desktop-only {
-                display: none;
-            }
-            .menu-toggle {
-                display: block;
-            }
-        }
-
-        /* */
         .hero-section {
             height: 100vh;
             min-height: 650px;
@@ -245,6 +251,7 @@
             overflow: hidden;
         }
 
+        /* Slow-motion panning/zooming cinematic background */
         .hero-bg {
             position: absolute;
             top: 0;
@@ -256,15 +263,19 @@
             background-position: center;
             opacity: 0.55; /* Subtle reduction in opacity */
             z-index: 1;
+            transform-origin: center;
+            animation: slowCinemaMotion 32s ease-in-out infinite alternate;
         }
 
+        /* Rich multi-layer high-contrast vignette and fading overlay */
         .hero-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, rgba(9, 9, 11, 0.45) 0%, rgba(9, 9, 11, 0.8) 100%);
+            background: radial-gradient(circle at center, rgba(9, 9, 11, 0.4) 0%, rgba(9, 9, 11, 0.75) 60%, rgba(9, 9, 11, 0.95) 100%),
+                        linear-gradient(180deg, rgba(9, 9, 11, 0.45) 0%, rgba(9, 9, 11, 1) 100%);
             z-index: 2;
         }
 
@@ -359,17 +370,28 @@
             transform: translateY(-2px);
         }
 
-        /* */
         section {
-            padding: 9rem 0;
+            padding: 6rem 0;
             position: relative;
             background-color: var(--bg-light);
             color: var(--text-primary);
         }
 
+        @media (min-width: 768px) {
+            section {
+                padding: 9rem 0;
+            }
+        }
+
         .section-header {
             max-width: 650px;
-            margin-bottom: 5rem;
+            margin-bottom: 3.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .section-header {
+                margin-bottom: 5rem;
+            }
         }
 
         .section-tag {
@@ -390,24 +412,37 @@
             line-height: 1.15;
         }
 
-        /* */
         .projects-container {
             display: flex;
             flex-direction: column;
-            gap: 4.5rem;
+            gap: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .projects-container {
+                gap: 4.5rem;
+            }
         }
 
         .project-card {
             background-color: var(--card-light);
             border: 1px solid var(--card-border-light);
             border-radius: var(--border-radius);
-            padding: 3.5rem;
+            padding: 2rem;
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 4rem;
+            grid-template-columns: 1fr;
+            gap: 2rem;
             transition: var(--transition-smooth);
             position: relative;
             overflow: hidden;
+        }
+
+        @media (min-width: 992px) {
+            .project-card {
+                grid-template-columns: 1.1fr 0.9fr;
+                gap: 4rem;
+                padding: 3.5rem;
+            }
         }
 
         .project-card:hover {
@@ -513,7 +548,7 @@
         /* Abstract Elegant Interactive Geometric Art */
         .project-visual-container {
             width: 100%;
-            height: 300px;
+            height: 220px;
             border-radius: 8px;
             background: radial-gradient(circle at center, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.05) 100%);
             border: 1px solid rgba(0,0,0,0.03);
@@ -522,6 +557,12 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
+        }
+
+        @media (min-width: 992px) {
+            .project-visual-container {
+                height: 300px;
+            }
         }
 
         /* Responsive image cover styling */
@@ -573,32 +614,33 @@
             color: var(--accent-red);
         }
 
-        @media (max-width: 992px) {
-            .project-card {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-                padding: 2.5rem;
-            }
-            .project-visual-container {
-                height: 220px;
-            }
-        }
-
-        /* */
         .education-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 4rem;
+            grid-template-columns: 1fr;
+            gap: 2rem;
             align-items: start;
+        }
+
+        @media (min-width: 992px) {
+            .education-grid {
+                grid-template-columns: 1.2fr 0.8fr;
+                gap: 4rem;
+            }
         }
 
         .education-card {
             background-color: var(--card-light);
             border: 1px solid var(--card-border-light);
             border-radius: var(--border-radius);
-            padding: 3.5rem;
+            padding: 2rem;
             position: relative;
             transition: var(--transition-smooth);
+        }
+
+        @media (min-width: 992px) {
+            .education-card {
+                padding: 3.5rem;
+            }
         }
 
         .education-card:hover {
@@ -681,20 +723,9 @@
             font-size: 0.95rem;
         }
 
-        @media (max-width: 992px) {
-            .education-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            .education-card {
-                padding: 2.5rem;
-            }
-        }
-
-        /* */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
             gap: 1.5rem;
         }
 
@@ -756,7 +787,6 @@
             color: var(--text-primary);
         }
 
-        /* */
         .contact-section {
             background-color: var(--bg-light);
             border-top: 1px solid rgba(0, 0, 0, 0.05);
@@ -764,9 +794,16 @@
 
         .contact-layout {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 5rem;
+            grid-template-columns: 1fr;
+            gap: 3rem;
             align-items: center;
+        }
+
+        @media (min-width: 992px) {
+            .contact-layout {
+                grid-template-columns: 1.2fr 0.8fr;
+                gap: 5rem;
+            }
         }
 
         .contact-cta h3 {
@@ -846,13 +883,6 @@
             transform: translateY(-2px);
         }
 
-        @media (max-width: 992px) {
-            .contact-layout {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-        }
-
         footer {
             background-color: var(--bg-light);
             padding: 5rem 0;
@@ -917,6 +947,19 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* Smooth Cinematic background movement */
+        @keyframes slowCinemaMotion {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+            50% {
+                transform: scale(1.07) translate(1%, -1%);
+            }
+            100% {
+                transform: scale(1) translate(0, 0);
+            }
+        }
+
         /* Intersection Observer entrance reveal definitions */
         .reveal {
             opacity: 0;
@@ -957,7 +1000,7 @@
         /* Grid formatting for Core Competencies */
         .competencies-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
             gap: 1.5rem;
             margin-top: 3rem;
         }
@@ -1053,7 +1096,6 @@
         <a href="#contact" class="mobile-nav-link">Contact</a>
     </div>
 
-    <!-- -->
     <section class="hero-section" id="hero">
         <div class="hero-bg"></div>
         <div class="hero-overlay"></div>
@@ -1078,14 +1120,22 @@
         </div>
     </section>
 
-    <!-- -->
     <section id="about" class="reveal">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Overview</span>
                 <h2 class="section-title">About Me</h2>
             </div>
-            <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: start;">
+            <div style="display: grid; grid-template-columns: 1fr; gap: 2.5rem;" class="about-grid-wrapper">
+                <!-- Apply direct flex/grid layout responsive triggers programmatically through desktop queries -->
+                <style>
+                    @media (min-width: 992px) {
+                        .about-grid-wrapper {
+                            grid-template-columns: 1.2fr 0.8fr !important;
+                            gap: 4rem !important;
+                        }
+                    }
+                </style>
                 <div>
                     <p style="font-size: 1.15rem; color: var(--text-primary); margin-bottom: 1.5rem; font-weight: 500; line-height: 1.6;">
                         I am a student with a broad, deliberately developed skill set spanning web development, design, content, and business analytics. Rather than specializing early, I have focused on building practical experience across multiple disciplines and applying them to real, delivered projects.
@@ -1107,7 +1157,6 @@
         </div>
     </section>
 
-    <!-- -->
     <section id="competencies" class="reveal" style="background: #fafafa; border-top: 1px solid rgba(0,0,0,0.02); border-bottom: 1px solid rgba(0,0,0,0.02);">
         <div class="container">
             <div class="section-header">
@@ -1150,7 +1199,6 @@
         </div>
     </section>
 
-    <!-- -->
     <section id="projects" class="reveal">
         <div class="container">
             <div class="section-header">
@@ -1236,14 +1284,21 @@
         </div>
     </section>
 
-    <!-- -->
     <section id="skills-section" class="reveal" style="background: #fafafa; border-top: 1px solid rgba(0,0,0,0.02); border-bottom: 1px solid rgba(0,0,0,0.02); padding: 6rem 0;">
         <div class="container">
-            <div style="display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 4rem; align-items: start;">
+            <div style="display: grid; grid-template-columns: 1fr; gap: 2.5rem;" class="skills-grid-wrapper">
+                <style>
+                    @media (min-width: 992px) {
+                        .skills-grid-wrapper {
+                            grid-template-columns: 0.8fr 1.2fr !important;
+                            gap: 4rem !important;
+                        }
+                    }
+                </style>
                 <div>
                     <span class="section-tag">Toolbox</span>
                     <h2 class="section-title" style="font-size: 2.2rem; margin-bottom: 1.5rem;">Skills Directory</h2>
-                    <p>Familiar tools, utilities, platforms, and methodologies deployed across projects.</p>
+                    <p>Familiar tools, platforms, and methodologies deployed across projects.</p>
                 </div>
                 <div>
                     <h4 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 1rem;">AI & Tools</h4>
@@ -1288,7 +1343,6 @@
         </div>
     </section>
 
-    <!-- -->
     <section id="education" class="reveal">
         <div class="container">
             <div class="section-header">
@@ -1329,7 +1383,6 @@
         </div>
     </section>
 
-    <!-- -->
     <section id="achievements" class="reveal" style="background: #fafafa; border-top: 1px solid rgba(0,0,0,0.02); border-bottom: 1px solid rgba(0,0,0,0.02);">
         <div class="container">
             <div class="section-header">
@@ -1389,7 +1442,6 @@
         </div>
     </section>
 
-    <!-- -->
     <section id="contact" class="contact-section reveal">
         <div class="container">
             <div class="contact-layout">
@@ -1473,7 +1525,6 @@
         </div>
     </footer>
 
-    <!-- -->
     <script>
         // Track Scroll Progress Indicator
         window.addEventListener('scroll', () => {
