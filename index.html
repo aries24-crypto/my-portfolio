@@ -42,6 +42,18 @@
             --s2t-grey: #f4f4f9;
         }
 
+        /* Grain texture overlay for a handcrafted tactile feel */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 10002;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -261,7 +273,7 @@
             background-image: url('WhatsApp Image 2026-06-30 at 10.29.26 (1).jpeg');
             background-size: cover;
             background-position: center;
-            opacity: 0.55; /* Subtle reduction in opacity */
+            opacity: 0.30; /* Decreased opacity for extreme text readability and contrast */
             z-index: 1;
             transform-origin: center;
             animation: slowCinemaMotion 32s ease-in-out infinite alternate;
@@ -1056,6 +1068,9 @@
 </head>
 <body>
 
+    <!-- Tactile grain texture globally applied over the viewport -->
+    <div class="grain-overlay"></div>
+
     <!-- Scroll Progress Indicator -->
     <div class="scroll-progress-container">
         <div class="scroll-progress-bar" id="progressBar"></div>
@@ -1114,7 +1129,7 @@
                 Currently pursuing a Bachelor of Fashion Technology at NIFT, with hands-on experience across web development, branding, and AI-assisted workflows.
             </p>
             <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="TejasYadav_resume.pdf" download="TejasYadav_resume.pdf" class="btn btn-primary hero-resume-btn">Download Resume (PDF)</a>
                 <a href="#contact" class="btn btn-secondary">Contact Me</a>
             </div>
         </div>
@@ -1619,6 +1634,14 @@
         resumeBtn.addEventListener('click', () => {
             showToast("Opening Resume document catalog...");
         });
+
+        // Attach toast event handler to Hero PDF download
+        const heroResumeBtn = document.querySelector('.hero-resume-btn');
+        if (heroResumeBtn) {
+            heroResumeBtn.addEventListener('click', () => {
+                showToast("Opening Resume document catalog...");
+            });
+        }
 
         function showToast(text) {
             const toast = document.getElementById('toast');
